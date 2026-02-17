@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="input">
+    <button id="btn" onclick="fun()">Add</button>
+    <ul id="ul">
+
+    </ul>
+    <script>
+        // var ar = [10, 20, 30]
+        // window.localStorage.setItem("array", JSON.stringify(ar))
+        var todo = []
+        // if (window.localStorage.getItem("todo")) {
+        //     todo = window.localStorage.getItem("todo")
+        //     genui(todo)
+        // }
+        function fun() {
+            todo.push(document.getElementById("input").value)
+            window.localStorage.setItem("todo", JSON.stringify(todo))
+            genui(todo)
+            document.getElementById("input").value = ""
+
+        }
+        // console.log(todo)
+        function genui(todo) {
+            document.getElementById("ul").innerText = ""
+            todo.forEach((val) => {
+                // var todo = JSON.parse(localStorage.getItem("todo"))
+                var li = document.createElement("li")
+                li.innerText = val
+                document.getElementById("ul").appendChild(li)
+            });
+
+        }
+    </script>
+</body>
+
+</html>
