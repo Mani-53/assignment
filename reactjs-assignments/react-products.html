@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="products.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            background: linear-gradient(135deg, #ffecd2, #fcb69f);
+        }
+
+        h4 {
+            color: #111827;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 0px;
+        }
+
+        i {
+            color: #6B7280;
+            font-size: 16px;
+        }
+
+        .card {
+            width: 250px;
+            display: flex;
+            flex-direction: column;
+            border-radius: 20px;
+            background: linear-gradient(145deg, #ffffff, #fff1f1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s ease;
+            padding: 18px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+        }
+
+        .image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .image:hover {
+            transform: scale(1.05);
+        }
+
+        .cardsdiv {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            padding: 50px;
+            box-sizing: border-box;
+            margin-top: 70px;
+            box-sizing: border-box;
+            gap: 3em;
+        }
+
+        #nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+            padding: 0 25px;
+            background: linear-gradient(90deg, #ff512f, #dd2476);
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1;
+        }
+
+        #ul {
+            display: flex;
+            list-style: none;
+        }
+
+        #ul li {
+            padding: 20px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        #ul li:hover {
+            color: #ffe066;
+            transform: translateY(-2px);
+        }
+
+        #search {
+            padding: 10px 80px 10px 15px;
+            border-radius: 25px;
+            border: none;
+            outline: none;
+            background: linear-gradient(135deg, #ffffff, #f1f1f1);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        #image {
+            width: 45px;
+            height: 45px;
+            border-radius: 8px;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .td {
+            display: flex;
+            flex: 1;
+            padding: 5px;
+        }
+
+        .small {
+            height: 15px;
+            width: 15px;
+        }
+
+        .bi-star-fill {
+            color: yellowgreen;
+            font-size: 1.2em;
+        }
+
+        .bi-star-half {
+            color: yellowgreen;
+            font-size: 1.2em;
+        }
+
+        #imagediv {
+            overflow: hidden;
+            height: auto;
+            width: 100%;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="nav">
+        <div>
+            <img src="https://th.bing.com/th/id/OIP.NKzdjOB4Z51Vll_e8R-LkgHaEy?w=274&h=180&c=7&r=0&o=7&dpr=1.4&pid=1.7&rm=3"
+                alt="" id="image">
+        </div>
+        <div>
+            <input type="text" placeholder="search...." id="search">
+        </div>
+        <div>
+            <ul id="ul">
+                <li>Home</li>
+                <li>Products</li>
+                <li>Recipes</li>
+                <li>Contact</li>
+
+            </ul>
+        </div>
+    </div>
+    <div id="main"></div>
+    <script type="text/babel">
+        // function Allrecipes() {
+        //     return (
+        //         <div id="maincard">
+        //             {
+        //                 allrecipes.recipes.map((recipe) => {
+        //                     return (
+        //                         <div class="card">
+        //                             <img src={recipe.image} alt="" />
+        //                             <h4>{recipe.name}</h4>
+        //                             <i>Rating:{recipe.rating}</i>
+        //                         </div>
+        //                     )
+        //                 })
+        //             }
+        //         </div>
+        //     )
+        // }
+        var images = [
+            "https://th.bing.com/th/id/OIP.YCXNIX971ixAhZwz46AcAwHaHg?w=202&h=204&c=7&r=0&o=7&dpr=1.4&pid=1.7&rm=3",
+            "https://th.bing.com/th?q=Caramel+Cake&w=120&h=120&c=1&rs=1&qlt=70&o=7&cb=1&dpr=1.4&pid=InlineBlock&rm=3&mkt=en-IN&cc=IN&setlang=en&adlt=moderate&t=1&mw=247"
+        ]
+        var icons = [
+            <i class="bi bi-star-fill" ></i>,
+            <i class="bi bi-star-half"></i>
+        ]
+        var i = 0
+        function Recipecard(props) {
+            return (
+                <div class="card">
+                    <div id="imagediv">
+                        <img src={props.m.image} alt="" class="image" />
+                    </div>
+                    <table>
+                        <tr>
+                            <td class="td">
+                                <h4>{props.m.name}
+                                </h4>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td">
+                                <strong>Type:{props.m.mealType[0]}</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td">
+                                <em>Rating:
+                                    {
+                                        props.m.rating == 4 || props.m.rating < 4.5 ? [icons[0], icons[0], icons[0], icons[0]] : ""
+                                    }
+                                    {
+                                        props.m.rating >= 4.5 && props.m.rating < 5 ? [icons[0], icons[0], icons[0], icons[0], icons[1]] : ""
+                                    }
+                                    {
+                                        props.m.rating == 5 ? [icons[0], icons[0], icons[0], icons[0], icons[0]] : ""
+                                    }
+                                    {props.m.rating}
+                                </em>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td">
+                                <span>Reviews:{props.m.reviewCount}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td">
+
+                            </td>
+                        </tr>
+                    </table>
+                </div >
+            )
+        }
+        function Allrecipes() {
+            return (
+                <div class="cardsdiv">
+                    {
+                        allrecipes.recipes.map((recipe) => {
+                            return <Recipecard m={recipe}></Recipecard>
+                        })
+                    }
+                </div>
+            )
+        }
+        ReactDOM.render(<Allrecipes />, document.getElementById("main"))
+
+        console.log(icons)
+    </script>
+</body>
+
+</html>

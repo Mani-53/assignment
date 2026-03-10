@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="main"></div>
+    <script type="text/babel">
+        function Counter() {
+            var [a, fun] = React.useState(0)
+            function inc() {
+                fun(++a)
+            }
+            function dec() {
+                fun(--a)
+            }
+            return (
+                <div>
+                    <h1>Counter:{a}</h1>
+                    <button onClick={() => { inc() }}>increase</button>
+                    <button onClick={() => { dec() }}>decrease</button>
+                </div>
+            )
+        }
+        ReactDOM.render(
+            <div style={{ border: "1px solid black" }}>
+                <Counter></Counter>
+                <Counter></Counter>
+                <Counter></Counter>
+            </div>
+
+            , document.getElementById("main"))
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        .todo1 {
+            border: 2px solid lightseagreen;
+            width: 250px;
+            height: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: yellow;
+            flex-direction: column;
+            border-radius: 15px;
+            padding: 20px;
+        }
+
+        .todo2 {
+            border: 2px solid lightslategray;
+            height: auto;
+            width: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: orange;
+            flex-direction: column;
+            border-radius: 15px;
+            padding: 20px;
+        }
+
+        #body {
+            display: flex;
+            border: 2px solid red;
+            height: auto;
+            justify-content: space-evenly;
+            align-items: center;
+            width: 100%;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main"></div>
+    <script type="text/babel">
+        function Todo(props) {
+            //state
+
+            var [arr, fun] = React.useState([])
+            var [title, func] = React.useState("")
+            var [h3, funct] = React.useState()
+            console.log(arr)
+
+            //action
+
+            function add() {
+                // var value = document.getElementById("input").value
+                // fun(arr.concat(value))
+                fun([...arr, { text: title, completed: false }])
+            }
+            function del(index) {
+                arr.splice(index, 1)
+                fun([...arr])
+            }
+            function done(todo, i) {
+                todo.completed = !todo.completed
+                console.log(todo.completed)
+                fun([...arr])
+            }
+            //ui
+            return (
+                <div className={props.className}>
+
+                    <div>
+                        <input type="text" id="input" onKeyUp={(ev) => {
+                            func(ev.target.value)
+                        }} />
+                        <button onClick={() => {
+                            add();
+                            // document.getElementById("input").value = ""
+
+                        }}>Add Todo</button>
+                    </div>
+                    <ul>
+                        {
+                            arr.map((todo, i) => {
+                                return (<li>
+                                    {
+                                        todo.completed ? <strike>{todo.text}</strike> : todo.text
+                                    }
+                                    <button onClick={() => { del(i) }}>delete</button>
+                                    <button onClick={() => { done(todo, i) }}>done</button>
+                                </li>)
+                            })
+                        }
+                    </ul>
+                </div>
+            )
+        }
+        ReactDOM.render(<div id="body">
+            <Todo className="todo1"></Todo>
+            <Todo className="todo2"></Todo>
+        </div>, document.getElementById("main"))
+    </script>
+</body>
+
+</html>

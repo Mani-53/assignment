@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: url("nature.webp");
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+
+        .parent {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            width: 600px;
+            display: flex;
+            flex-direction: column;
+            color: white;
+            justify-content: center;
+            margin-bottom: 30px;
+            border-radius: 20px;
+            padding: 25px;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s ease;
+        }
+
+        .parent:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .parent h1 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .parent input {
+            width: 300px;
+            height: 35px;
+            border-radius: 8px;
+            border: none;
+            padding-left: 10px;
+            outline: none;
+            margin-top: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+        }
+
+        .child {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 15px;
+            font-weight: 400;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main1">
+    </div>
+    <div id="main2">
+    </div>
+    <script type="text/babel">
+        function Parent1() {
+            var [title1, settext1] = React.useState("")
+            function fun(ev) {
+                settext1(ev.target.value)
+            }
+            return (
+                <div className="parent">
+                    <h1>Parent-Child communication</h1>
+                    <h2>Parent</h2>
+                    <input type="text" onKeyUp={(ev) => { fun(ev) }} />
+                    <Child1 m1={title1} />
+                </div>
+            )
+        }
+        function Child1(props) {
+            return (
+                <div className="child">
+                    <h2>Child</h2>
+                    <h3>{props.m1}</h3>
+                </div>
+            )
+        }
+        ReactDOM.render(<Parent1 />, document.getElementById("main1"))
+        function Parent2() {
+            var [tilte2, settext2] = React.useState("")
+            function abc(data) {
+                settext2(data)
+            }
+            return (
+                <div className="parent">
+                    <h1>Child-Parent communication</h1>
+                    <h2>Parent:{tilte2}</h2>
+                    <Child2 m2={abc} />
+                </div>
+            )
+        }
+        function Child2(props) {
+            function func(ev) {
+                props.m2(ev.target.value)
+            }
+            return (
+                <div className="child">
+                    <h2>Child</h2>
+                    <input type="text" onKeyUp={(ev) => { func(ev) }} />
+                </div>
+            )
+        }
+        ReactDOM.render(<Parent2 />, document.getElementById("main2"))
+    </script>
+</body>
+
+</html>

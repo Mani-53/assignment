@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        .btn {
+            background-color: rgba(76, 0, 130, 0.706);
+            color: #fff;
+            border-radius: 10px;
+            padding: 10px 18px;
+            border: 0px;
+            box-shadow: 0px 4px 15px rgba(76, 0, 130, 0.706);
+            cursor: pointer;
+        }
+
+        .div {
+            border: 2px solid;
+            height: 200px;
+            width: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main"></div>
+    <script type="text/babel">
+
+        // var jsx = <button onClick={() => { alert("You clicked the button") }}
+        //     class="btn">
+        //     Click here...</button>
+        // ReactDOM.render(jsx, document.getElementById("main"))
+
+
+        // var jsx = <button onClick={() => { console.log("You clicked the button") }}
+        //     class="btn">
+        //     Click here...</button>
+        // ReactDOM.render(jsx, document.getElementById("main"))
+
+
+        // var jsx = <button onClick={(ev) => { console.log(ev, event) }}
+        //     class="btn">
+        //     Click here...</button>
+        // ReactDOM.render(jsx, document.getElementById("main"))
+
+
+        // var jsx = <div class="div" onClick={(ev) => { console.log(ev) }}>click here...</div >
+        // ReactDOM.render(jsx, document.getElementById("main"))
+
+
+        // var jsx = <div class="div" onClick={(ev) => { console.log(ev.clientX); console.log(ev.clientY) }}>click here...</div >
+        // ReactDOM.render(jsx, document.getElementById("main"))
+
+
+        // var jsx = <div class="div" onClick={(ev) => { console.log(ev.target.innerText) }}>click here...</div >
+        // ReactDOM.render(jsx, document.getElementById("main"))
+
+
+        // var jsx = <div class="div" onClick={(ev) => { console.log(ev.target.id) }} id="Innerdiv">click here...</div >
+        // ReactDOM.render(jsx, document.getElementById("main"))
+
+
+        // var jsx = <h1 onClick={(ev) => { console.log(ev.target.innerText) }}>HI..! WELCOME TO REACT-JS</h1>
+        // ReactDOM.render(jsx, document.getElementById("main"))
+
+
+
+        // var jsx = <button onClick={(ev) => { console.log(ev) }}>Click here...</button>
+
+        // var jsx = <div>
+        //     <input type="text" id="input" />
+        //     <button onClick={() => { console.log(document.getElementById("input").value) }}>Click here..</button>
+        // </div>
+
+
+
+        // var jsx = <div>
+        //     <input type="text" id="input" />
+        //     <h1 id="h1"></h1>
+        //     <button onClick={() => { document.getElementById("h1").innerText = document.getElementById("input").value }} >Click here..</button>
+        // </div>
+
+
+        // var jsx = <div>
+        //     <input type="text" id="input" />
+        //     <h1 id="h1"></h1>
+        //     <button onClick={() => { document.getElementById("h1").innerText = document.getElementById("input").value.toUpperCase() }} >Click here..</button>
+        // </div>
+
+
+        // var jsx = <div>
+        //     <input type="text" onKeyUp={() => { upper() }} id="input" />
+        //     <h1 id="h1"></h1>
+        // </div>
+        // function upper() {
+        //     document.getElementById("h1").innerText = document.getElementById("input").value.toUpperCase()
+        // }
+
+
+
+        // var jsx = <div>
+        //     <input type="text" id="input" onBlur={(ev) => { add(ev) }} />
+        //     <h1 id="h1"></h1>
+        // </div>
+        // function add(ev) {
+        //     document.getElementById("h1").innerText = ev.target.value.toUpperCase()
+        // }
+
+
+        // var jsx = <div>
+        //     <input type="text" id="input" onKeyUp={(ev) => { add(ev) }} />
+        //     <h1 id="h1"></h1>
+        // </div>
+        // function add(ev) {
+        //     document.getElementById("h1").innerText = ev.target.value
+        // }
+
+
+        // var jsx = <div>
+        //     <input type="text" id="input" onKeyUp={() => { add() }} />
+        //     <h1 id="h1"></h1>
+        //     <button onClick={() => { clear() }}>Clear text</button>
+        // </div>
+        // function clear() {
+        //     document.getElementById("input").value = ""
+        //     add()
+        // }
+        // function add() {
+        //     document.getElementById("h1").innerText = document.getElementById("input").value
+        // }
+
+
+
+        // var jsx = <div>
+        //     <input type="text" id="input1" /><br />
+        //     <input type="text" id="input2" />
+        //     <button onClick={() => add()}>Add</button>
+        //     <h1 id="h1"></h1>
+        // </div>
+        // function add() {
+        //     var input1 = document.getElementById("input1").value
+        //     var input2 = document.getElementById("input2").value
+        //     var input3 = parseInt(input1) + parseInt(input2)
+        //     document.getElementById("h1").innerText = input3
+        // }
+
+
+
+        // var jsx = <div>
+        //     <input type="text" id="input1" /><br />
+        //     <input type="text" id="input2" />
+        //     <button onClick={() => add()}>Subtract</button>
+        //     <h1 id="h1"></h1>
+        // </div>
+        // function add() {
+        //     var input1 = document.getElementById("input1").value
+        //     var input2 = document.getElementById("input2").value
+        //     var input3 = parseInt(input1) - parseInt(input2)
+        //     document.getElementById("h1").innerText = input3
+        // }
+
+        // var jsx = <div>
+        //     <input type="text" id="input1" /><br />
+        //     <input type="text" id="input2" />
+        //     <button onClick={() => mul()}>Mul</button>
+        //     <button onClick={() => divs()}>Division</button>
+        //     <h1 id="h1"></h1>
+        // </div>
+        // function mul() {
+        //     var input1 = document.getElementById("input1").value
+        //     var input2 = document.getElementById("input2").value
+        //     var input3 = parseInt(input1) * parseInt(input2)
+        //     document.getElementById("h1").innerText = input3
+        // }
+        // function divs() {
+        //     var input1 = document.getElementById("input1").value
+        //     var input2 = document.getElementById("input2").value
+        //     var input3 = parseInt(input1) / parseInt(input2)
+        //     document.getElementById("h1").innerText = input3
+        // }
+
+
+
+        // var jsx = <div>
+        //     <input type="radio" id="input1" onChange={(ev) => { change(ev) }} name="sweets" value="Gulab jamun" /><label for="input1" id="sweet1">Gulab jamun</label>
+        //     <input type="radio" id="input2" onChange={(ev) => { change(ev) }} name="sweets" value="Jilebi" /><label for="input2" id="sweet2">jilebi</label>
+        //     <h1 id="h1"></h1>
+        // </div>
+        // function change(ev) {
+        //     document.getElementById("h1").innerText = ev.target.value
+        // }
+
+
+
+        // var jsx = <div>
+        //     <input type="radio" onChange={() => { male() }} name="gender" />Male <br />
+        //     <input type="radio" onChange={() => { female() }} name="gender" />Female <br />
+        //     <img src="" alt="" id="image" style={{ height: "400px", width: "300px", display: "none" }} />
+        // </div>
+        // function male() {
+        //     document.getElementById("image").style.display = "block"
+        //     document.getElementById("image").src = "https://th.bing.com/th/id/OIP.4qUN0_7qTBGSujcMl05E3AHaHa?w=192&h=192&c=7&r=0&o=7&dpr=1.4&pid=1.7&rm=3"
+        // }
+        // function female() {
+        //     document.getElementById("image").style.display = "block"
+        //     document.getElementById("image").src = "https://th.bing.com/th/id/OIP.IEa7crqE4W8Bm9WWq8shCgHaHa?w=135&h=150&c=6&o=7&dpr=1.4&pid=1.7&rm=3"
+        // }
+
+
+
+        // var jsx = <div>
+        //     <select name="" id="select" onChange={() => { render() }}>
+        //         <option value="HTML">HTML</option>
+        //         <option value="CSS">CSS</option>
+        //         <option value="Java script">Java script</option>
+        //         <option value="React js">React js</option>
+        //     </select>
+        //     <h1 id="h1"></h1>
+        // </div>
+        // function render() {
+        //     document.getElementById("h1").innerText = document.getElementById("select").value
+        // }
+
+
+
+        // var arr = []
+        // var jsx = <div>
+        //     <input type="checkbox" onChange={(ev) => { input(ev) }} value="HTML" />:HTML <br />
+        //     <input type="checkbox" onChange={(ev) => { input(ev) }} value="CSS" />:CSS <br />
+        //     <input type="checkbox" onChange={(ev) => { input(ev) }} value="Java script" />:Java script <br />
+        //     <input type="checkbox" onChange={(ev) => { input(ev) }} value="React Js" />:React JS <br />
+        //     <input type="checkbox" onChange={(ev) => { input(ev) }} value="JSX" />:JSX <br />
+        //     <h1 id="h1"></h1>
+        // </div>
+        // function input(ev) {
+        //     if (ev.target.checked) {
+        //         arr.push(ev.target.value)
+        //         document.getElementById("h1").innerText = arr
+        //     }
+        //     else {
+        //         var i = arr.indexOf(ev.target.value)
+        //         arr.splice(i, 1)
+        //         document.getElementById("h1").innerText = arr
+        //     }
+        // }
+
+
+        // var jsx = <div>
+        //     <input type="date" onChange={(ev) => { change(ev) }} />
+        //     <h1 id="h1"></h1>
+        // </div>
+        // function change(ev) {
+        //     document.getElementById("h1").innerText = ev.target.value
+        // }
+
+        // var jsx = <div>
+        //     <button onClick={(ev) => { render(ev) }} value="1">Button1</button>
+        //     <button onClick={(ev) => { render(ev) }} value="10">Button1</button>
+        //     <button onClick={(ev) => { render(ev) }} value="100">Button1</button>
+        //     <button onClick={(ev) => { render(ev) }} value="1000">Button1</button>
+        //     <h1 id="h1"></h1>
+        // </div>
+        // function render(ev) {
+        //     document.getElementById("h1").innerText = ev.target.value
+        // }
+
+
+        // var arr = ['HTML', 'CSS', 'Java script', 'React Js']
+        // var jsx = <ul>
+        //     {
+        //         arr.map((item, i) => {
+        //             return <li onClick={() => { alert(i) }}>{item}</li>
+        //         })
+        //     }
+        // </ul>
+
+
+        // var arr = ['HTML', 'CSS', 'Java script', 'React Js']
+        // var jsx = <ul>
+        //     {
+        //         arr.map((item, i) => {
+        //             return <li onClick={() => { alert(item) }}>{item}</li>
+        //         })
+        //     }
+        // </ul>
+
+
+        // var arr = [
+        //     {
+        //         firstname: "Andhra pradesh",
+        //         lastname: "AP"
+        //     },
+        //     {
+        //         firstname: "Uttar pradesh",
+        //         lastname: "UP"
+        //     },
+        //     {
+        //         firstname: "West bengal",
+        //         lastname: "WB"
+        //     },
+        //     {
+        //         firstname: "Himachal pradesh",
+        //         lastname: "HP"
+        //     }
+        // ]
+        // var jsx = <div>
+        //     <ul>
+        //         {
+        //             arr.map((place, i) => {
+        //                 return <li>{place.firstname} <button onClick={() => { click(place, i) }}>see</button></li>
+        //             })
+        //         }
+        //     </ul>
+        //     <h1 id="h1"></h1>
+        // </div>
+        // function click(place, i) {
+        //     document.getElementById("h1").innerText = place.lastname + "is at:" + i
+        // }
+
+
+        // var arr = ['html', 'css', 'java script', 'react js']
+        // var jsx = <div>
+        //     <ul>
+        //         {
+        //             arr.map((c, i) => {
+        //                 return <li onClick={() => { render(c, i) }}>{c}</li>
+        //             })
+        //         }
+        //     </ul>
+        //     <h1 id="h1"></h1>
+        //     <h2 id="h2"></h2>
+        // </div>
+        // function render(c, i) {
+        //     document.getElementById("h1").innerText = c
+        //     document.getElementById("h2").innerText = i
+        // }
+
+
+
+
+        // const arr = [
+        //     {
+        //         id: 1,
+        //         name: "Arjun Kumar",
+        //         age: 20,
+        //         course: "Computer Science",
+        //         grade: "A"
+        //     },
+        //     {
+        //         id: 2,
+        //         name: "Priya Sharma",
+        //         age: 19,
+        //         course: "Information Technology",
+        //         grade: "B+"
+        //     },
+        //     {
+        //         id: 3,
+        //         name: "Rahul Verma",
+        //         age: 21,
+        //         course: "Mechanical Engineering",
+        //         grade: "A-"
+        //     },
+        //     {
+        //         id: 4,
+        //         name: "Sneha Reddy",
+        //         age: 22,
+        //         course: "Electronics",
+        //         grade: "B"
+        //     },
+        //     {
+        //         id: 5,
+        //         name: "Vikram Singh",
+        //         age: 20,
+        //         course: "Civil Engineering",
+        //         grade: "A+"
+        //     }
+        // ];
+
+        // var jsx = <div>
+        //     <ul>
+        //         {
+        //             arr.map((person, i) => {
+        //                 return <li onClick={() => { click(person, i) }}>{person.name}</li>
+        //             })
+        //         }
+        //     </ul>
+        //     <h1 id="h1"></h1>
+        //     <h2 id="h2"></h2>
+        //     <h3 id="h3"></h3>
+        //     <h4 id="h4"></h4>
+        //     <h5 id="h5"></h5>
+        // </div>
+        // function click(person, i) {
+        //     document.getElementById("h1").innerText = person.name
+        //     document.getElementById("h2").innerText = i
+        //     document.getElementById("h3").innerText = person.age
+        //     document.getElementById("h4").innerText = person.course
+        //     document.getElementById("h5").innerText = person.grade
+        // }
+
+
+        // var a = 100
+        // var jsx = <h1>{a}</h1>
+
+
+        // var a = 1
+        // var jsx = <div>
+        //     <h1 id="h1">{a}</h1>
+        //     <button onClick={() => { fun() }}>Increment</button>
+        // </div>
+        // function fun() {
+        //     ++a
+        //     document.getElementById("h1").innerText = a
+        // }
+
+        // var a = 0
+        // var jsx = <div>
+        //     <h1 id="h1">{a}</h1>
+        //     <button onClick={() => { fun() }}>Decrement</button>
+        // </div>
+        // function fun() {
+        //     --a
+        //     document.getElementById("h1").innerText = a
+        // }
+
+        // var count = 0
+        // var jsx = <div>
+        //     <h1>counter:<span id="span">0</span></h1>
+        //     <button onClick={() => { document.getElementById("span").innerText = --count }}>decrement</button>
+        //     <button onClick={() => { document.getElementById("span").innerText = ++count }}>increment</button>
+        // </div>
+
+        // var count = 0
+        // var jsx = <div>
+        //     <h1>counter:<span id="span">0</span></h1>
+        //     <button onClick={() => { document.getElementById("span").innerText = --count }}>decrement</button>
+        //     <button onClick={() => { document.getElementById("span").innerText = ++count }}>increment</button>
+        //     <button onClick={() => { count = 0; document.getElementById("span").innerText = count }}>reset</button>
+        // </div>
+
+
+
+        // var arr = []
+        // var jsx = <div>
+        //     <input type="text" id="input" />
+        //     <button onClick={() => { arr.push(document.getElementById("input").value); console.log(arr) }}>Push into array</button>
+        // </div>
+
+
+        // var arr = []
+        // var jsx = <div>
+        //     <input type="text" id="input" />
+        //     <button onClick={() => {
+        //         arr.push(document.getElementById("input").value);
+        //         console.log(arr)
+        //         document.getElementById("h1").innerText = arr
+        //     }}>
+        //         Push into array</button>
+        //     <h1 id="h1"></h1>
+        // </div>
+
+
+        // var arr = []
+        // function genui() {
+        //     var jsx = <div>
+        //         <input type="text" id="input" />
+        //         <button onClick={() => { fun() }}>Push into array</button>
+        //         <ul>
+        //             {
+        //                 arr.map((a) => {
+        //                     return <li>{a}</li>
+        //                 })
+        //             }
+        //         </ul>
+
+        //     </div>
+        //     ReactDOM.render(jsx, document.getElementById("main"))
+        // }
+        // genui()
+        // function fun() {
+        //     arr.push(document.getElementById("input").value)
+        //     genui()
+        //     document.getElementById("input").value = ""
+        // }
+
+
+
+        // var arr = []
+        // function add() {
+        //     arr.push(document.getElementById("input").value)
+        //     genUI()
+        //     document.getElementById("input").value = ""
+        // }
+        // function del(i) {
+        //     arr.splice(i, 1)
+        //     genUI()
+        // }
+        // function genUI() {
+        //     var jsx = <div>
+        //         <input type="text" id="input" />
+        //         <button onClick={() => { add() }}>ADD</button>
+        //         <ul>
+        //             {
+        //                 arr.map((list, i) => {
+        //                     return <li>{list} <button onClick={() => { del(i) }}>Delete</button></li>
+        //                 })
+        //             }
+        //         </ul>
+        //     </div>
+        //     ReactDOM.render(jsx, document.getElementById("main"))
+        // }
+        // genUI()
+
+
+
+        var count = 0
+        var jsx = <div>
+            <h1 id="h1"></h1>
+        </div>
+
+        function timer() {
+            var date = new Date()
+            var time = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()
+            document.getElementById("h1").innerText = time
+        }
+        setInterval(() => {
+            timer()
+        }, 1000)
+        ReactDOM.render(jsx, document.getElementById("main"))
+
+
+
+        
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="products.js"></script>
+</head>
+
+<body>
+    <div id="main"></div>
+    <div id="main2"> </div>
+    <script type="text/babel">
+        function Parent() {
+            var [text, settext] = React.useState("")
+            function value(ev) {
+                settext(ev.target.value)
+            }
+            return (
+                <div >
+                    <h1>Parent</h1>
+                    <input type="text" onKeyUp={(ev) => { value(ev) }} />
+                    <Child m={text} />
+                </div>
+            )
+
+        }
+        function Child(props) {
+            // console.log(props)
+            return (
+                <div>
+                    <h2>Child</h2>
+                    <h3>{props.m}</h3>
+                </div>
+
+            )
+        }
+        function Parent1() {
+            var [text1, settext1] = React.useState("")
+            function abc(data) {
+                settext1(data)
+            }
+            return (
+                <div>
+                    <h2>Parent:{text1}</h2>
+                    <Child1 m={abc} />
+                </div>
+            )
+        }
+        function Child1(props) {
+            console.log(props)
+            function fun(ev) {
+                props.m(ev.target.value)
+            }
+            return (
+                <div>
+                    <h1>Child</h1>
+                    <input type="text" onKeyUp={(ev) => { fun(ev) }} />
+
+                </div>
+            )
+        }
+        ReactDOM.render(<div style={{ border: "2px solid", padding: "20px" }}>
+            <Parent />
+
+        </div>, document.getElementById("main"))
+        ReactDOM.render(<div style={{ border: "2px solid", padding: "20px" }}>
+            <Parent1 />
+        </div>, document.getElementById("main2"))
+    </script>
+</body>
+
+</html>

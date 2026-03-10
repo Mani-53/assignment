@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script crossorign src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        .table {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        .table td {
+            border: 1px solid;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="div"></div>
+    <script type="text/babel">
+        console.log(React)
+        console.log(ReactDOM)
+        var student = [
+            {
+                fullname: "Mani",
+                age: 18,
+                place: "Dharmavaram"
+            },
+            {
+                fullname: "xxxxxxx",
+                age: 18,
+                place: "Hyd"
+            },
+            {
+                fullname: "xxxxxxxx",
+                age: 18,
+                place: "Tirupati"
+            }
+        ]
+        var jsx1 = <table style={{ color: "red" }} class="table">
+            {
+                student.map((s) => {
+                    return (
+                        <tr><td>{s.fullname}</td><td>{s.age}</td><td>{s.place}</td></tr>
+                    )
+                })
+            }
+        </table>
+        ReactDOM.render(jsx1, document.getElementById("div"))
+    </script>
+</body>
+
+</html>

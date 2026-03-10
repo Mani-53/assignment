@@ -8,34 +8,86 @@
 </head>
 
 <body>
-    <input type="text" id="input">
-    <button id="btn" onclick="fun()">Add</button>
-    <ul id="ul">
 
-    </ul>
+    <input type="text" id="input" onkeyup="button()">
+    <button id="btn" onclick="fun()">Add</button>
+
+    <ul id="ul"></ul>
     <script>
-        // var ar = [10, 20, 30]
-        // window.localStorage.setItem("array", JSON.stringify(ar))
+
+        document.getElementById("btn").disabled = true
+
+        function button() {
+            if (document.getElementById("input").value == "") {
+                document.getElementById("btn").disabled = true
+            }
+            else {
+                document.getElementById("btn").disabled = false
+            }
+        }
+
         var todo = []
         // if (window.localStorage.getItem("todo")) {
-        //     todo = window.localStorage.getItem("todo")
-        //     genui(todo)
+        //     todo = window.localStorage.getItem("todo", todo)
+        //     genui()
         // }
-        function fun() {
-            todo.push(document.getElementById("input").value)
-            window.localStorage.setItem("todo", JSON.stringify(todo))
-            genui(todo)
-            document.getElementById("input").value = ""
 
+        function fun() {
+
+            todo.push({ text: document.getElementById("input").value, status: false })
+            console.log(todo)
+            // window.localStorage.setItem("todo", JSON.stringify(todo))
+            genui()
+            document.getElementById("input").value = ""
+            document.getElementById("btn").disabled = true
         }
-        // console.log(todo)
-        function genui(todo) {
-            document.getElementById("ul").innerText = ""
-            todo.forEach((val) => {
-                // var todo = JSON.parse(localStorage.getItem("todo"))
+
+        function genui() {
+            // todo = window.localStorage.getItem("todo",todo)
+            // console.log(todo)
+            document.getElementById("ul").innerHTML = ""
+            todo.forEach((val, i) => {
+                var span = document.createElement("span")
+                span.innerHTML = val.text
                 var li = document.createElement("li")
-                li.innerText = val
+                var del = document.createElement("button")
+                del.innerText = "Delete"
+                var done = document.createElement("button")
+                done.innerText = "Done"
+                var strike = document.createElement("strike")
+                del.addEventListener("click", function () {
+                    document.getElementById("ul").innerHTML = ''
+                    console.log(i)
+                    todo.splice(i, 1);
+                    // window.localStorage.setItem("todo", JSON.stringify(todo))
+                    genui();
+                })
+                del.disabled = true
+
+                done.addEventListener("click", function () {
+                    val.status = true
+                    console.log(strike)
+                    strike.appendChild(span)
+                    del.disabled = false
+                    done.disabled = true
+
+                })
+                if (val.status == true) {
+                    strike.appendChild(span)
+                    del.disabled = false
+                    done.disabled = true
+                }
+                else {
+                    li.appendChild(span)
+                    del.disabled = true
+                }
+
+
+                li.appendChild(strike)
+                li.appendChild(del)
+                li.appendChild(done)
                 document.getElementById("ul").appendChild(li)
+
             });
 
         }

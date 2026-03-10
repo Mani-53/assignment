@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #input {
+            height: 35px;
+            width: 200px;
+            font-size: 1em;
+        }
+
+        #addbtn {
+            padding: 10px;
+            background-color: rgba(46, 46, 175, 0.76);
+            color: white;
+            font-size: 1em;
+            font-weight: 400;
+            /* height: 30px; */
+            width: 120px;
+            border: 0px;
+            border-radius: 5px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        #listdiv {
+            height: 350px;
+            width: 350px;
+            border: 2px solid;
+            border-radius: 10px;
+        }
+
+        li {
+            list-style: none;
+            display: flex;
+            gap: 1em;
+            width: 100%;
+            /* border: 1px solid; */
+            margin: 0px;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            margin-left: 0px;
+        }
+
+        #listcheck {
+            cursor: pointer;
+        }
+
+        #btndiv {
+            display: flex;
+            gap: 3rem;
+        }
+
+        #btndiv button {
+            /* width: 70px;  */
+            padding: 10px 25px;
+            background-color: rgba(46, 46, 175, 0.76);
+            color: white;
+            font-size: 1em;
+            border-radius: 10px;
+            border: 0px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text" id="input" placeholder="Enter your todo" required>
+    <button id="addbtn" onclick="add()">+Add List</button><br><br>
+    <!-- <input type="checkbox" id="check"> -->
+    <div id="listdiv">
+        <ul id="ul">
+
+        </ul>
+    </div>
+    <br>
+    <div id="btndiv">
+        <!-- <button id="del">Delete</button>
+        <button id="done">Done</button> -->
+    </div>
+
+    <script>
+        var todo = []
+        var input = document.getElementById("input")
+        function add() {
+            // console.log(todo)
+            todo.push({ text: input.value, status: false })
+            input.value = ""
+            genui()
+            // console.log(input)
+        }
+        function genui() {
+            document.getElementById("ul").innerHTML = ""
+            todo.forEach(function (list, i) {
+                // console.log(list)
+                var check = document.createElement("input")
+                check.type = "checkbox"
+                check.id = "listcheck"
+                // console.log(check)
+                var li = document.createElement("li")
+                li.appendChild(check)
+                var span = document.createElement("span")
+                span.innerHTML = list.text
+                li.appendChild(span)
+                var del = document.createElement("button")
+                console.log(li)
+                var del = document.getElementById('del')
+                li.appendChild(del)
+                del.addEventListener('click', function () {
+                    if (document.getElementById("listcheck").checked) {
+                        list.status = true
+                        console.log(list)
+                        if (list.status == true) {
+                            todo.splice(i, 1)
+                        }
+                        else {
+                            return
+                        }
+                    }
+                    genui()
+
+                })
+                check.addEventListener("change", function () {
+                    if (check.checked) {
+
+                    }
+                })
+                document.getElementById("ul").appendChild(li)
+
+            })
+            // var done = document.getElementById("done")
+            // done.addEventListener("click", function () {
+            //     var strike = document.createElement("strike")
+            //     if (document.getElementById("listcheck").checked) {
+            //         strike.appendChild(span)
+            //         li.appendChild(strike)
+            //         console.log(li)
+            //     }
+            //     genui()
+            // })
+
+
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>

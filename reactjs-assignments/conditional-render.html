@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        .table {
+            border: 1px solid;
+        }
+
+        .table td {
+            border: 1px solid;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main"></div>
+    <script type="text/babel">
+        var people = [
+            {
+                name: "Rahul",
+                age: 25,
+                profession: "Engineer"
+            },
+            {
+                name: "Sneha",
+                age: 28,
+                profession: "Engineer"
+            },
+            {
+                name: "Arjun",
+                age: 30,
+                profession: "Engineer"
+            },
+            {
+                name: "Priya",
+                age: 26,
+                profession: "Doctor"
+            },
+            {
+                name: "Kiran",
+                age: 29,
+                profession: "Doctor"
+            }
+        ];
+        var images = [
+            "https://th.bing.com/th/id/OIP.IDRnX3GogdnYgO61Jy3kuAHaFj?w=265&h=199&c=7&r=0&o=7&dpr=1.4&pid=1.7&rm=3",
+            "data:image/webp;base64,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"
+        ]
+        var jsx = <div>
+            <table class="table">
+                {
+                    people.map((p) => {
+                        return (
+                            <tr>
+                                <td>{p.name}</td>
+                                <td>{p.age}</td>
+                                <td>{p.profession}</td>
+                                <td>
+                                    {
+                                        p.profession == "Engineer" ? <img src={images[0]} alt="" height="100px" width="100px" /> : ""
+                                    }
+                                    {
+                                        p.profession == "Doctor" ? <img src={images[1]} alt="" height="100px" width="100px" /> : ""
+
+                                    }
+                                </td>
+
+                            </tr>
+                        )
+                    })
+                }
+            </table>
+        </div >
+        ReactDOM.render(jsx, document.getElementById("main"))
+    </script>
+</body>
+
+</html>

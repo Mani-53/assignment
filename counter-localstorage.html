@@ -13,17 +13,25 @@
     <button id="btn1" onclick="fun1()">increment</button>
     <script>
         var count = 0
+        if (window.localStorage.getItem("count")) {
+            count = window.localStorage.getItem("count")
+            console.log(count)
+            document.getElementById("h1").innerText = "Counter :" + count
+
+        }
         function fun1() {
             count++
             window.localStorage.setItem("count", JSON.stringify(count))
-            var c = JSON.parse(localStorage.getItem("count"))
-            document.getElementById("h1").innerText = "Counter :" + c
+            document.getElementById("h1").innerText = "Counter :" + count
+            // count=window.localStorage.getItem("count")
+
         }
         function fun2() {
             count--
             window.localStorage.setItem("count", JSON.stringify(count))
-            var c = JSON.parse(localStorage.getItem("count"))
-            document.getElementById("h1").innerText = "Counter :" + c
+            document.getElementById("h1").innerText = "Counter :" + count
+
+            // count=window.localStorage.getItem("count")
 
         }
     </script>

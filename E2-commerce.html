@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #f0f4ff, #fdfbff);
+            overflow-X: hidden;
+        }
+
+        /* Smooth animation */
+        * {
+            transition: all 0.3s ease;
+        }
+
+        #ul {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5em;
+            padding: 30px;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        /* Card Design */
+        #ul li {
+            display: flex;
+            align-items: center;
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Hover effect */
+        #ul li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(236, 72, 153, 0.2);
+        }
+
+        /* Image Section */
+        #div1 {
+            width: 220px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #div1 img {
+            height: 180px;
+            width: 180px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Details Section */
+        #div2 {
+            flex: 1;
+            padding-left: 30px;
+        }
+
+        #div2 h3 {
+            margin: 0;
+            font-size: 20px;
+            color: #1e293b;
+        }
+
+        #div2 p {
+            color: #64748b;
+            margin-top: 8px;
+            line-height: 1.4;
+            width: 700px;
+        }
+
+        /* Remove Button */
+        #removebtn {
+            border: none;
+            border-radius: 50%;
+            height: 35px;
+            width: 35px;
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            box-shadow: 0 4px 15px rgba(255, 65, 108, 0.4);
+        }
+
+        #removebtn:hover {
+            transform: scale(1.1);
+        }
+
+        .qty-box {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .qty-box button {
+            width: 30px;
+            height: 30px;
+            border: none;
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .qty-box button:hover {
+            transform: scale(1.1);
+        }
+
+        .qty-box span {
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="h1div">
+        <h1 style="color: rgba(228, 17, 17, 0.788);position: relative;left: 100px;">Added items are....</h1>
+    </div>
+    <ul id="ul">
+        <!-- <li id="li"></li> -->
+    </ul>
+
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get("id");
+        if (window.localStorage.getItem("cart")) {
+            console.log("hi")
+            var arr = JSON.parse(localStorage.getItem("cart"))
+            arr.forEach(function (item, i) {
+                var ul = document.getElementById("ul")
+                // var li = `<li>
+                //     <div id="imgdiv"><img src="${item.thumbnail}"></div>
+                //     <div id="details-div">
+                //         <h3>${item.title}</h3>
+                //         <p>${item.description}</p>
+                //         <p>${item.price}</p>
+                //     </div>
+                //     <button id="removebtn">X</button>
+                // </li>
+                // `
+
+                var li = document.createElement("li")
+                var div1 = document.createElement("div")
+                div1.id = "div1"
+                var div2 = document.createElement("div")
+                div2.id = "div2"
+                var img = document.createElement("img")
+                img.src = `${item.thumbnail}`
+                var h3 = document.createElement("h3")
+                h3.innerText = `${item.title}`
+                var p = document.createElement("p")
+                p.innerText = `${item.description}`
+                div1.appendChild(img)
+                div2.appendChild(h3)
+                div2.appendChild(p)
+                // li.appendChild(img)
+                li.appendChild(div1)
+                li.appendChild(div2)
+                var removebtn = document.createElement("button")
+                removebtn.id = "removebtn"
+                removebtn.innerText = "X"
+                li.appendChild(removebtn)
+                ul.appendChild(li)
+                var price = document.createElement("p")
+                price.innerHTML = "<strong>Price:</strong> ₹" + item.price
+                price.style.color = "#16a34a"
+                price.style.fontWeight = "bold"
+
+                var rating = document.createElement("p")
+                rating.innerHTML = "⭐ " + item.rating
+
+                var quantityDiv = document.createElement("div")
+                quantityDiv.className = "qty-box"
+
+                var minusBtn = document.createElement("button")
+                minusBtn.innerText = "-"
+
+                var qty = document.createElement("span")
+                qty.innerText = "1"
+
+                var plusBtn = document.createElement("button")
+                plusBtn.innerText = "+"
+
+                quantityDiv.appendChild(minusBtn)
+                quantityDiv.appendChild(qty)
+                quantityDiv.appendChild(plusBtn)
+
+                div2.appendChild(price)
+                div2.appendChild(rating)
+                div2.appendChild(quantityDiv)
+
+                /* Quantity Logic */
+                var quantity = 1
+
+                plusBtn.addEventListener("click", function () {
+                    quantity++
+                    qty.innerText = quantity
+                })
+
+                minusBtn.addEventListener("click", function () {
+                    if (quantity > 1) {
+                        quantity--
+                        qty.innerText = quantity
+                    }
+                })
+                removebtn.addEventListener("click", function () {
+                    console.log(i)
+                    arr.splice(i, 1)
+                    window.localStorage.setItem("cart", JSON.stringify(arr))
+                })
+
+            })
+        }
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="" id="form">
+        <input type="text" id="titlevalue" name="title"><br>
+        <input type="text" id="status" name="status"><br>
+        <!-- <b>Gender</b><br>
+        <input type="radio" name="gender" class="gender" id="male"><label for="male">Male</label>
+        <input type="radio" name="gender" class="gender" id="female"><label for="female">Female</label>
+        <input type="radio" name="gender" class="gender" id="others"><label for="others">others</label><br> -->
+
+        <button type="submit" id="btn">Submit</button>
+    </form>
+    <!-- <ul id="ul"></ul>
+    <button id="getbutton">Get data</button> -->
+
+    <script>
+        // document.getElementById("getbutton").addEventListener("click", function () {
+        //     fetch("http://localhost:3000/todos", { method: "GET" })
+        //         .then((res) => { return res.json() })
+        //         .then(function (data) {
+        //             console.log(data)
+        //             data.forEach(function (tit) {
+        //                 var li = document.createElement("li")
+        //                 li.innerText = tit.title
+        //                 document.getElementById("ul").appendChild(li)
+        //             })
+        //         })
+        // })
+        document.getElementById("form").addEventListener("submit", function (c) {
+            c.preventDefault()
+            console.log("hi")
+            var title = document.getElementById("titlevalue").value
+            var status = document.getElementById("status").value
+            var gender = document.getElementsByClassName("gender")
+            console.log(gender)
+            fetch("http://localhost:3000/todos", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    title: title,
+                    status: status,
+                    // gender: gender
+                })
+            }).then((res) => { return res.json() }).then((data) => { console.log("data is :", data) })
+        })
+
+
+
+
+    </script>
+</body>
+
+</html>
